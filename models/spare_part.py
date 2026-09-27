@@ -1,6 +1,7 @@
 from odoo import models, fields
 
 class FleetSparePart(models.Model):
+    _inherit = ['mail.thread', 'mail.activity.mixin']
     _name = 'fleet.spare.part'
     _description = 'Fleet Spare Part Details'
 

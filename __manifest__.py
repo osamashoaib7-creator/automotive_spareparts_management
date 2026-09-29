@@ -1,8 +1,11 @@
 {
-    'category': 'services',
     'name': 'Automotive & Spare Parts Management',
-    'version': '19.0.1.0.0',
-    'depends': ['fleet','mail'],
+    'version': '19.0.1.1.0',
+    'category': 'Services',
+    'summary': 'Vehicle spare parts linked to products, warehouses, purchase and sales',
+    'author': 'Osama Shoaib',
+    'license': 'LGPL-3',
+    'depends': ['fleet', 'mail', 'stock', 'purchase', 'sale_management'],
     'data': [
         'security/ir.model.access.csv',
         'security/vehicle_record_rules.xml',

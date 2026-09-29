@@ -1,15 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <record id="view_fleet_spare_part_tree" model="ir.ui.view">
-        <field name="name">fleet.spare.part.tree</field>
+        <field name="name">fleet.spare.part.list</field>
         <field name="model">fleet.spare.part</field>
         <field name="arch" type="xml">
             <list string="Spare Parts" editable="bottom">
                 <field name="name"/>
                 <field name="part_number"/>
                 <field name="vehicle_id"/>
+                <field name="product_id" optional="show"/>
+                <field name="warehouse_id" optional="show"/>
+                <field name="location_id" optional="show"/>
+                <field name="vendor_id" optional="hide"/>
                 <field name="price"/>
                 <field name="quantity"/>
+                <field name="on_hand_qty" optional="show"/>
+                <field name="available_qty" optional="hide"/>
+                <field name="company_id" column_invisible="True"/>
             </list>
         </field>
     </record>
@@ -19,20 +26,32 @@
         <field name="model">fleet.spare.part</field>
         <field name="arch" type="xml">
             <form string="Spare Part">
+                <header>
+                    <button name="action_create_purchase_order" type="object" string="Create RFQ"
+                            class="btn-primary" groups="purchase.group_purchase_user"
+                            invisible="not id"/>
+                </header>
                 <sheet>
                     <group>
-                        <field name="name"/>
-                        <field name="part_number"/>
-                        <field name="vehicle_id"/>
-                        <field name="price"/>
-                        <field name="quantity"/>
+                        <group string="Part">
+                            <field name="name"/>
+                            <field name="part_number"/>
+                            <field name="vehicle_id"/>
+                            <field name="product_id" readonly="1" invisible="not product_id"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                        <group string="Stock &amp; Purchasing">
+                            <field name="warehouse_id"/>
+                            <field name="location_id"/>
+                            <field name="vendor_id"/>
+                            <field name="price"/>
+                            <field name="quantity"/>
+                            <field name="on_hand_qty"/>
+                            <field name="available_qty"/>
+                        </group>
                     </group>
                 </sheet>
-                <div class="oe_chatter">
-                    <field name="message_follower_ids"/>
-                    <field name="activity_ids"/>
-                    <field name="message_ids"/>
-                </div>
+                <chatter/>
             </form>
         </field>
     </record>

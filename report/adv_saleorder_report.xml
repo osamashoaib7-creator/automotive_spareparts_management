@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- PDF Report Action -->
+    <record id="action_report_sale_order_pdf" model="ir.actions.report">
+        <field name="name">Sale Orders PDF Report</field>
+        <field name="model">sale.order.report.wizard</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">automotive_spareparts_management.report_sale_order_template</field>
+        <field name="report_file">automotive_spareparts_management.report_sale_order_template</field>
+        <field name="binding_model_id" eval="False"/>
+    </record>
+
+    <!-- PDF QWeb Template -->
+    <template id="report_sale_order_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <h2 class="text-center">Sale Orders Report</h2>
+                        <p class="text-center">
+                            <strong>From:</strong> <span t-field="doc.date_from"/> |
+                            <strong>To:</strong> <span t-field="doc.date_to"/>
+                        </p>
+                        <br/>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Order #</th>
+                                    <th>Date</th>
+                                    <th>Customer</th>
+                                    <th class="text-end">Total Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-set="orders" t-value="doc._get_orders()"/>
+                                <t t-foreach="orders" t-as="o">
+                                    <tr>
+                                        <td><span t-field="o.name"/></td>
+                                        <td><span t-field="o.date_order"/></td>
+                                        <td><span t-field="o.partner_id.name"/></td>
+                                        <td class="text-end"><span t-field="o.amount_total"/></td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

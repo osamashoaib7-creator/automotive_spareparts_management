@@ -12,6 +12,8 @@
         'views/spare_part_views.xml',
         'views/fleet_vehicle_views.xml',
         'report/vehicle_spare_parts_report.xml',
+        'report/adv_saleorder_report.xml',
+        'wizard/sale_order_report_wizard_views.xml',
     ],
     'installable': True,
     'application': True,
